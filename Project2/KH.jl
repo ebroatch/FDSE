@@ -7,6 +7,7 @@ using Oceananigans
 # First, we need to set some physical parameters for the simulation
 # Set the domain size in non-dimensional coordinates
 Lx = 8  # size in the x-direction
+Lx = 11.2 #CHANGE TO A MULTIPLE OF HIGHEST GROWTH WAVELENGTH ~1.4
 Lz = 1   # size in the vertical (z) direction 
 
 # Set the grid size
@@ -15,10 +16,12 @@ Nz = 64   # number of gridpoints in the z-direction
 
 # Some timestepping parameters
 max_Δt = 0.02 # maximum allowable timestep 
-duration = 20 # The non-dimensional duration of the simulation
+#duration = 20 # The non-dimensional duration of the simulation
+duration = 60 #MAKE SIMULATION LONGER FOR MOVIE 3
 
 # Set the Reynolds number (Re=Ul/ν)
-Re = 5000
+#Re = 5000
+Re = 5000000 #INCREASE Re FOR MOVIE 5
 # Set the Prandtl number (Pr=ν/κ)
 Pr = 1
 
@@ -28,7 +31,11 @@ N₀=sqrt(10) # maximum buoyancy frequency
 h=0.1 # shear layer width
 
 # Set the amplitude of the random perturbation (kick)
-kick = 0.05
+#kick = 0.05
+#kick = 0.01 #KICK FOR MOVIE 2
+#kick = 0.001 #KICK FOR MOVIE 3
+#kick = 0.00001 #KICK FOR MOVIE 4
+kick = 0.0000001 #KICK FOR MOVIE 5
 
 # construct a rectilinear grid using an inbuilt Oceananigans function
 # Here, we use periodic (cyclic) boundary conditions in x

@@ -1,7 +1,7 @@
 
 # This script reads in output from KH.jl, makes a plot, and saves an animation
 
-using Oceananigans, JLD2, Plots, Printf
+using Oceananigans, JLD2, Plots, Printf, Statistics
 
 # Set the filename (without the extension)
 filename = "KH"
@@ -34,6 +34,9 @@ iterations = parse.(Int, keys(file_xz["timeseries/t"]))
 
 @info "Making an animation from saved data..."
 
+w_rms=zeros(length(iterations))
+t_save=zeros(length(iterations))
+
 # Here, we loop over all iterations
 anim = @animate for (i, iter) in enumerate(iterations)
 
@@ -54,6 +57,9 @@ anim = @animate for (i, iter) in enumerate(iterations)
         χ_xz_plot = heatmap(xχ, zχ, χ_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal, xlims = (0, Lx), ylims = (0, Lz)); 
         ϵ_xz_plot = heatmap(xϵ, zϵ, ϵ_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal, xlims = (0, Lx), ylims = (0, Lz)); 
 
+    w_rms[i] = mean((w_xz.^2)).^0.5
+    t_save[i] = t
+
     u_title = @sprintf("u, t = %s", round(t));
     v_title = @sprintf("v, t = %s", round(t));
     w_title = @sprintf("w, t = %s", round(t));
@@ -72,4 +78,4 @@ end
 close(file_xz)
 
 # Save the animation to a file
-mp4(anim, "KH.mp4", fps = 20) # hide
+mp4(anim, "KH5.mp4", fps = 20) # hide
