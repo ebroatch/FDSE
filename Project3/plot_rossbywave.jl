@@ -65,22 +65,22 @@ anim = @animate for (i, iter) in enumerate(iterations)
     w_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, u_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=w_title, fontsize=14);  
     c_xy_plot = Plots.heatmap(xc/1e3, yc/1e3, c_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=c_title, fontsize=14);  
 
-    #plot(u_xy_plot, c_xy_plot, layout = (1, 2), size = (1300, 600)) #ONLY PLOT VORTICITY MOVIE FOR NOW
+    plot(u_xy_plot, c_xy_plot, layout = (1, 2), size = (1300, 600)) #ONLY PLOT VORTICITY MOVIE FOR NOW
 
-    omega_title = @sprintf("Relative vorticity (1/s), t = %s days", round(t/1day)); #RELATIVE VORTICITY TITLE
-    vort_title = @sprintf("Absolute vorticity (1/s), t = %s days", round(t/1day)); #ABSOLUTE VORTICITY TITLE
+    #omega_title = @sprintf("Relative vorticity (1/s), t = %s days", round(t/1day)); #RELATIVE VORTICITY TITLE
+    #vort_title = @sprintf("Absolute vorticity (1/s), t = %s days", round(t/1day)); #ABSOLUTE VORTICITY TITLE
 
-    omega_xy_plot = Plots.heatmap(xo/1e3, yo/1e3, omega_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=omega_title, fontsize=14); #PLOT RELATIVE VORTICITY 
-    vort_xy_plot = Plots.heatmap(xo/1e3, yo/1e3, vort_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=vort_title, fontsize=14);  #PLOT ABSOLUTE VORTICITY
+    #omega_xy_plot = Plots.heatmap(xo/1e3, yo/1e3, omega_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=omega_title, fontsize=14); #PLOT RELATIVE VORTICITY 
+    #vort_xy_plot = Plots.heatmap(xo/1e3, yo/1e3, vort_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=vort_title, fontsize=14);  #PLOT ABSOLUTE VORTICITY
     
-    plot(omega_xy_plot, vort_xy_plot, layout = (1, 2), size = (1300, 600)) #ONLY PLOT VORTICITY MOVIE FOR NOW
+    #plot(omega_xy_plot, vort_xy_plot, layout = (1, 2), size = (1300, 600)) #ONLY PLOT VORTICITY MOVIE FOR NOW
 
     iter == iterations[end] && close(file_xy)
 end
 
 # Save the animation to a file
-#mp4(anim, "rossbywave_ic_0_05.mp4", fps = 20) # hide #ONLY PLOT VORTICITY MOVIE FOR NOW
-mp4(anim, "rossbywave_vort_ic_0_001.mp4", fps = 20) # hide
+mp4(anim, "rossbywave_lat75.mp4", fps = 20) # hide #ONLY PLOT VORTICITY MOVIE FOR NOW
+#mp4(anim, "rossbywave_vort_ic_0_001.mp4", fps = 20) # hide
 
 # Now, make a plot of our saved variables
 Plots.heatmap(xu / 1kilometer, t_save / 1day, u_mid', xlabel="x (km)", ylabel="t (days)", title="u at y=Ly/2")
